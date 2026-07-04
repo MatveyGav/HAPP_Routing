@@ -1,9 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta http-equiv="refresh" content="0; url=happ://routing/add/happ://routing/add/eyJOYW1lIjoi0JfQsNCx0LvQvtC60LjRgNC+0LLQsNC90L3QvtC1IiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJvdXRlT3JkZXIiOiJibG9jay1wcm94eS1kaXJlY3QiLCJSZW1vdGVETlNUeXBlIjoiRG9IIiwiUmVtb3RlRE5TRG9tYWluIjoiaHR0cHM6Ly9jbG91ZGZsYXJlLWRucy5jb20vZG5zLXF1ZXJ5IiwiUmVtb3RlRE5TSVAiOiIxLjEuMS4xIiwiRG9tZXN0aWNETlNUeXBlIjoiRG9IIiwiRG9tZXN0aWNETlNEb21haW4iOiJodHRwczovL2Rucy5nb29nbGUvZG5zLXF1ZXJ5IiwiRG9tZXN0aWNETlNJUCI6IjguOC44LjgiLCJHZW9pcHVybCI6Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9ydW5ldGZyZWVkb20vcnVzc2lhLXYycmF5LXJ1bGVzLWRhdC9yZWxlYXNlL2dlb2lwLmRhdCIsIkdlb3NpdGV1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcnVuZXRmcmVlZG9tL3J1c3NpYS12MnJheS1ydWxlcy1kYXQvcmVsZWFzZS9nZW9zaXRlLmRhdCIsIkxhc3RVcGRhdGVkIjoiIiwiRG5zSG9zdHMiOnt9LCJEaXJlY3RTaXRlcyI6WyJnZW9zaXRlOnByaXZhdGUiXSwiRGlyZWN0SXAiOlsiZ2VvaXA6cHJpdmF0ZSIsIjEwLjAuMC4wLzgiLCIxNzIuMTYuMC4wLzEyIiwiMTkyLjE2OC4wLjAvMTYiLCIxNjkuMjU0LjAuMC8xNiIsIjIyNC4wLjAuMC80IiwiMjU1LjI1NS4yNTUuMjU1Il0sIlByb3h5U2l0ZXMiOlsiZ2Vvc2l0ZTpydS1ibG9ja2VkIl0sIlByb3h5SXAiOlsiZ2VvaXA6cnUtYmxvY2tlZCIsIjEuMC4wLjEiLCIxLjEuMS4xIiwiOC44LjguOCIsIjguOC40LjQiXSwiQmxvY2tTaXRlcyI6WyJnZW9zaXRlOmNhdGVnb3J5LWFkcy1hbGwiXSwiQmxvY2tJcCI6W10sIkRvbWFpblN0cmF0ZWd5IjoiSVBPbkRlbWFuZCIsIkZha2VETlMiOiJmYWxzZSIsIlVzZUNodW5rRmlsZXMiOiJ0cnVlIn0=">
+<meta charset="UTF-8">
+<meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no">
+<meta name="theme-color" content="#161B23">
+<title>Маршрутизация</title>
+<style>
+  :root {
+    --bg: #161B23;
+    --card-bg: rgba(255,255,255,0.03);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255,255,255,0.65);
+    --cyan: #22d3ee;
+    --teal: #20c997;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon.cyan {
+    background: linear-gradient(135deg, rgba(34,211,238,0.15) 0%, rgba(34,211,238,0.08) 100%);
+    border: 1px solid rgba(34,211,238,0.3);
+    color: var(--cyan);
+  }
+  .icon.teal {
+    background: linear-gradient(135deg, rgba(32,201,151,0.15) 0%, rgba(32,201,151,0.08) 100%);
+    border: 1px solid rgba(32,201,151,0.3);
+    color: var(--teal);
+  }
+  .icon svg { width: 22px; height: 22px; }
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+  .content h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 4px 0 6px;
+    color: var(--text-primary);
+  }
+  .content p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 14px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: opacity 0.15s ease;
+  }
+  .btn:active { opacity: 0.7; }
+  .btn.cyan {
+    background: rgba(34,211,238,0.15);
+    color: var(--cyan);
+  }
+  .btn.teal {
+    background: rgba(32,201,151,0.15);
+    color: var(--teal);
+  }
+  .footnote {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+  .footnote a { color: rgba(255,255,255,0.5); }
+</style>
 </head>
 <body>
-  <p>Открываю Happ...</p>
+  <div class="page">
+    <div class="header">
+      <h1>Профили маршрутизации</h1>
+      <p>Выберите профиль ниже — он откроется в приложении Happ и добавится автоматически</p>
+    </div>
+
+    <div class="card">
+      <div class="icon cyan">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg>
+      </div>
+      <div class="content">
+        <h2>Заблокированное</h2>
+        <p>Российские сайты и приватные сети — напрямую, заблокированные в РФ ресурсы — через прокси, реклама блокируется.</p>
+        <a class="btn cyan" href="happ://routing/add/eyJOYW1lIjoi0JfQsNCx0LvQvtC60LjRgNC+0LLQsNC90L3QvtC1IiwiR2xvYmFsUHJveHkiOiJmYWxzZSIsIlJvdXRlT3JkZXIiOiJibG9jay1kaXJlY3QtcHJveHkiLCJSZW1vdGVETlNUeXBlIjoiRG9IIiwiUmVtb3RlRE5TRG9tYWluIjoiaHR0cHM6Ly9jbG91ZGZsYXJlLWRucy5jb20vZG5zLXF1ZXJ5IiwiUmVtb3RlRE5TSVAiOiIxLjEuMS4xIiwiRG9tZXN0aWNETlNUeXBlIjoiRG9IIiwiRG9tZXN0aWNETlNEb21haW4iOiJodHRwczovL2Rucy5nb29nbGUvZG5zLXF1ZXJ5IiwiRG9tZXN0aWNETlNJUCI6IjguOC44LjgiLCJHZW9pcHVybCI6Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9ydW5ldGZyZWVkb20vcnVzc2lhLXYycmF5LXJ1bGVzLWRhdC9yZWxlYXNlL2dlb2lwLmRhdCIsIkdlb3NpdGV1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcnVuZXRmcmVlZG9tL3J1c3NpYS12MnJheS1ydWxlcy1kYXQvcmVsZWFzZS9nZW9zaXRlLmRhdCIsIkxhc3RVcGRhdGVkIjoiIiwiRG5zSG9zdHMiOnt9LCJEaXJlY3RTaXRlcyI6WyJnZW9zaXRlOnByaXZhdGUiXSwiRGlyZWN0SXAiOlsiZ2VvaXA6cHJpdmF0ZSIsIjEwLjAuMC4wLzgiLCIxNzIuMTYuMC4wLzEyIiwiMTkyLjE2OC4wLjAvMTYiLCIxNjkuMjU0LjAuMC8xNiIsIjIyNC4wLjAuMC80IiwiMjU1LjI1NS4yNTUuMjU1Il0sIlByb3h5U2l0ZXMiOlsiZ2Vvc2l0ZTpydS1ibG9ja2VkIl0sIlByb3h5SXAiOlsiZ2VvaXA6cnUtYmxvY2tlZCIsIjEuMC4wLjEiLCIxLjEuMS4xIiwiOC44LjguOCIsIjguOC40LjQiXSwiQmxvY2tTaXRlcyI6WyJnZW9zaXRlOmNhdGVnb3J5LWFkcy1hbGwiXSwiQmxvY2tJcCI6W10sIkRvbWFpblN0cmF0ZWd5IjoiSVBPbkRlbWFuZCIsIkZha2VETlMiOiJmYWxzZSIsIlVzZUNodW5rRmlsZXMiOiJ0cnVlIn0=">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Добавить профиль
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon teal">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+      </div>
+      <div class="content">
+        <h2>Всё, кроме РФ</h2>
+        <p>Российские сайты, приватные сети и IP-адреса РФ — напрямую, весь остальной трафик — через прокси, реклама блокируется.</p>
+        <a class="btn teal" href="happ://routing/add/eyJOYW1lIjoi0JLRgdGRLCDQutGA0L7QvNC1INGA0YQiLCJHbG9iYWxQcm94eSI6InRydWUiLCJSb3V0ZU9yZGVyIjoiYmxvY2stZGlyZWN0LXByb3h5IiwiUmVtb3RlRE5TVHlwZSI6IkRvSCIsIlJlbW90ZUROU0RvbWFpbiI6Imh0dHBzOi8vY2xvdWRmbGFyZS1kbnMuY29tL2Rucy1xdWVyeSIsIlJlbW90ZUROU0lQIjoiMS4xLjEuMSIsIkRvbWVzdGljRE5TVHlwZSI6IkRvSCIsIkRvbWVzdGljRE5TRG9tYWluIjoiaHR0cHM6Ly9kbnMuZ29vZ2xlL2Rucy1xdWVyeSIsIkRvbWVzdGljRE5TSVAiOiI4LjguOC44IiwiR2VvaXB1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcnVuZXRmcmVlZG9tL3J1c3NpYS12MnJheS1ydWxlcy1kYXQvcmVsZWFzZS9nZW9pcC5kYXQiLCJHZW9zaXRldXJsIjoiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3J1bmV0ZnJlZWRvbS9ydXNzaWEtdjJyYXktcnVsZXMtZGF0L3JlbGVhc2UvZ2Vvc2l0ZS5kYXQiLCJMYXN0VXBkYXRlZCI6IiIsIkRuc0hvc3RzIjp7fSwiRGlyZWN0U2l0ZXMiOlsiZ2Vvc2l0ZTpwcml2YXRlIiwiZ2Vvc2l0ZTpydS1hdmFpbGFibGUtb25seS1pbnNpZGUiXSwiRGlyZWN0SXAiOlsiZ2VvaXA6cHJpdmF0ZSIsIjEwLjAuMC4wLzgiLCIxNzIuMTYuMC4wLzEyIiwiMTkyLjE2OC4wLjAvMTYiLCIxNjkuMjU0LjAuMC8xNiIsIjIyNC4wLjAuMC80IiwiMjU1LjI1NS4yNTUuMjU1IiwiZ2VvaXA6cnUiXSwiUHJveHlTaXRlcyI6W10sIlByb3h5SXAiOlsiMS4wLjAuMSIsIjEuMS4xLjEiLCI4LjguOC44IiwiOC44LjQuNCJdLCJCbG9ja1NpdGVzIjpbImdlb3NpdGU6Y2F0ZWdvcnktYWRzLWFsbCJdLCJCbG9ja0lwIjpbXSwiRG9tYWluU3RyYXRlZ3kiOiJJUE9uRGVtYW5kIiwiRmFrZUROUyI6ImZhbHNlIiwiVXNlQ2h1bmtGaWxlcyI6InRydWUifQ==">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Добавить профиль
+        </a>
+      </div>
+    </div>
+
+    <p class="footnote">Ссылки открываются только на устройстве с установленным <a href="https://happ.su">Happ</a></p>
+  </div>
 </body>
 </html>

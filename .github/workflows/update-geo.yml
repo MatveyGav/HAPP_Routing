@@ -1,0 +1,41 @@
+name: Update trimmed geo files
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download source geo files
+        run: |
+          curl -sL -o geoip_full.dat https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/geoip.dat
+          curl -sL -o geosite_full.dat https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/geosite.dat
+
+      - name: Download geoview
+        run: |
+          curl -sL -o geoview https://github.com/snowie2000/geoview/releases/latest/download/geoview-linux-amd64
+          chmod +x geoview
+
+      - name: Trim geoip.dat
+        run: |
+          ./geoview -type geoip -action convert -input geoip_full.dat \
+            -list private,ru-blocked -format geoip -output geoip.dat
+
+      - name: Trim geosite.dat
+        run: |
+          ./geoview -type geosite -action convert -input geosite_full.dat \
+            -list private,ru-blocked,category-ads-all -format geosite -output geosite.dat
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add geoip.dat geosite.dat
+          git diff --staged --quiet || git commit -m "Auto-update trimmed geo files"
+          git push

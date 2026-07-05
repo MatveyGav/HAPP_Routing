@@ -30,7 +30,7 @@ jobs:
       - name: Trim geosite.dat
         run: |
           ./geoview -type geosite -action convert -input geosite_full.dat \
-            -list private,ru-blocked,category-ads-all -format geosite -output geosite.dat
+            -list private,ru-blocked,category-ads-all,ru-available-only-inside -format geosite -output geosite.dat
 
       - name: Commit and push if changed
         run: |

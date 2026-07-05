@@ -25,7 +25,7 @@ jobs:
       - name: Trim geoip.dat
         run: |
           ./geoview -type geoip -action convert -input geoip_full.dat \
-            -list private,ru-blocked -format geoip -output geoip.dat
+            -list private,ru-blocked,ru -format geoip -output geoip.dat
 
       - name: Trim geosite.dat
         run: |
